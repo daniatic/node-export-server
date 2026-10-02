@@ -1,6 +1,21 @@
 import { Config } from '../../lib/envs';
 
 describe('Environment variables should be correctly parsed', () => {
+  test('PUPPETEER_PIPE should be a boolean', () => {
+    expect(
+      Config.partial().parse({ PUPPETEER_PIPE: 'true' }).PUPPETEER_PIPE
+    ).toEqual(true);
+    expect(
+      Config.partial().parse({ PUPPETEER_PIPE: 'false' }).PUPPETEER_PIPE
+    ).toEqual(false);
+    expect(
+      Config.partial().parse({ PUPPETEER_PIPE: '' }).PUPPETEER_PIPE
+    ).toBeUndefined();
+    expect(() =>
+      Config.partial().parse({ PUPPETEER_PIPE: 'invalid' })
+    ).toThrow();
+  });
+
   test('PUPPETEER_TEMP_DIR should be a valid path', () => {
     const env = { PUPPETEER_TEMP_DIR: '/path/to/dir' };
     expect(Config.partial().parse(env).PUPPETEER_TEMP_DIR).toEqual(

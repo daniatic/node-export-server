@@ -161,6 +161,7 @@ The format, along with its default values, is as follows (using the recommended 
 {
   "puppeteer": {
     "args": [],
+    "pipe": false,
     "launchRetryWindow": 30000,
     "tempDir": "./tmp/"
   },
@@ -358,6 +359,7 @@ These variables are set in your environment and take precedence over options fro
 
 ### Puppeteer Config
 
+- `PUPPETEER_PIPE`: Use a pipe instead of a WebSocket for the browser connection (defaults to `false`). This disables the browser's WebSocket debugging endpoint. When `DEBUG_ENABLE` is `true`, set `DEBUG_DEBUGGING_PORT` to `0` to avoid combining pipe transport with a nonzero debugging port.
 - `PUPPETEER_TEMP_DIR`: The directory for Puppeteer to store temporary files (defaults to `./tmp/`).
 - `PUPPETEER_LAUNCH_RETRY_WINDOW`: The duration, in milliseconds, to keep retrying a browser launch before reporting it as failed (defaults to `30000`).
 
